@@ -29,12 +29,12 @@
 #define LED_PIN 12
 #define BUTTON_PIN 13
 
-static bool ledState = false;
+static bool led_state = false;
 
-void buttonInteruptHandle()
+void button_interupt_handle()
 {
 	ETS_GPIO_INTR_DISABLE(); //Vô hiệu hóa ngắt trên các chân
-	gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_DISABLE);
+	//gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_DISABLE);
 	os_delay_us(5000);
 
 	uint32 gpioStatus = GPIO_REG_READ(GPIO_STATUS_ADDRESS); //đọc trạng thái ngắt GPIO
@@ -42,9 +42,9 @@ void buttonInteruptHandle()
 
 	if (gpioStatus & BIT(BUTTON_PIN)){ //Nếu thực sự có ngắt xảy ra ở nút nhấn
 		if (!GPIO_INPUT_GET(BUTTON_PIN)){
-			ledState = !ledState;
-			GPIO_OUTPUT_SET(LED_PIN, ledState);
-			os_printf("LED state: %d \n", ledState);
+			led_state = !led_state;
+			GPIO_OUTPUT_SET(LED_PIN, led_state);
+			os_printf("LED state: %d \n", led_state);
 		}
 	}
 
@@ -68,7 +68,7 @@ user_init(void)
     PIN_PULLUP_EN(PERIPHS_IO_MUX_MTCK_U);//set pullup cho GPIO13
 
     ETS_GPIO_INTR_DISABLE(); //Vô hiệu hóa ngắt trên các chân
-    ETS_GPIO_INTR_ATTACH(buttonInteruptHandle, NULL); //hàm được gọi khi có ngắt
+    ETS_GPIO_INTR_ATTACH(button_interupt_handle, NULL); //hàm được gọi khi có ngắt
     gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_NEGEDGE); //ngắt cạnh xuống
 
     ETS_GPIO_INTR_ENABLE(); //Kích hoạt ngắt
