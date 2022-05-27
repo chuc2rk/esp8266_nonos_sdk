@@ -69,9 +69,9 @@ user_init(void)
 
     ETS_GPIO_INTR_DISABLE(); //Vô hiệu hóa ngắt trên các chân
     ETS_GPIO_INTR_ATTACH(buttonInteruptHandle, NULL); //hàm được gọi khi có ngắt
-    //gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_NEGEDGE); //ngắt cạnh xuống
+    gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_NEGEDGE); //ngắt cạnh xuống
 
-    //ETS_GPIO_INTR_ENABLE(); //Kích hoạt ngắt
+    ETS_GPIO_INTR_ENABLE(); //Kích hoạt ngắt
 }
 
 /******************************************************************************
