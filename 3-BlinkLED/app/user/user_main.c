@@ -52,7 +52,7 @@ user_init(void)
 
     os_timer_disarm(&led_timer);
     os_timer_setfn(&led_timer, (os_timer_func_t *)led_timer_blink, NULL);
-    os_timer_arm(&led_timer, 500, true);
+    //os_timer_arm(&led_timer, 500, true);//
 }
 
 /******************************************************************************
