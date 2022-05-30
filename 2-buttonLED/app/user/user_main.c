@@ -34,7 +34,6 @@ static bool led_state = false;
 void button_interupt_handle()
 {
 	ETS_GPIO_INTR_DISABLE(); //Vô hiệu hóa ngắt trên các chân
-	//gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_DISABLE);
 	os_delay_us(5000);
 
 	uint32 gpioStatus = GPIO_REG_READ(GPIO_STATUS_ADDRESS); //đọc trạng thái ngắt GPIO
@@ -48,7 +47,7 @@ void button_interupt_handle()
 		}
 	}
 
-	gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_NEGEDGE);
+	gpio_pin_intr_state_set(BUTTON_PIN, GPIO_PIN_INTR_NEGEDGE);//ngắt cạnh xuống
 	ETS_GPIO_INTR_ENABLE();// Kích hoạt lại ngắt sau khi đã disable ở trên
 }
 

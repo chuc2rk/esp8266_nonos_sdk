@@ -87,9 +87,11 @@ user_rf_pre_init(void)
 void ICACHE_FLASH_ATTR
 user_init(void)
 {
-    os_printf("\n=======================================\n");
-    os_printf("\t\t Hello World\n");
+	uart_init(115200,115200);
+	os_delay_us(10000);
+	os_printf("\r\n=======================================\r\n");
+    os_printf("\t\t Hello World\r\n");
     os_printf("\t\t SDK version: %s \n", system_get_sdk_version());
-    os_printf("\n=======================================\n");
+    os_printf("\r\n=======================================\r\n");
 }
 
