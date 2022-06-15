@@ -24,18 +24,6 @@
 #include "osapi.h"
 #include "user_interface.h"
 
-
-void ICACHE_FLASH_ATTR
-user_init(void)
-{
-	uart_init(115200,115200);
-	os_delay_us(10000);
-	os_printf("\r\n=======================================\r\n");
-    os_printf("\t\t Hello World\r\n");
-    os_printf("\t\t SDK version: %s \n", system_get_sdk_version());
-    os_printf("\r\n=======================================\r\n");
-}
-
 /******************************************************************************
  * FunctionName : user_rf_cal_sector_set
  * Description  : SDK just reversed 4 sectors, used for rf init data and paramters.
@@ -92,5 +80,18 @@ user_rf_pre_init(void)
 {
 }
 
-
+/**
+ * @brief Test spi interfaces.
+ *
+ */
+void ICACHE_FLASH_ATTR
+user_init(void)
+{
+	uart_init(115200,115200);
+	os_delay_us(10000);
+	os_printf("\r\n=======================================\r\n");
+    os_printf("\t\t Hello World\r\n");
+    os_printf("\t\t SDK version: %s \n", system_get_sdk_version());
+    os_printf("\r\n=======================================\r\n");
+}
 
