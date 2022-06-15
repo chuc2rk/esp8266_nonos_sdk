@@ -34409,7 +34409,7 @@ user_init(void)
 402255fd:	040c      	movi.n	a4, 0
 402255ff:	b03501        	l32r	a0, 402116d4 <ieee80211_getmgtframe+0x6f0>
 40225602:	0000c0        	callx0	a0
-    os_timer_arm(&led_timer, 500, true);
+    os_timer_arm(&led_timer, 500, true);//
 40225605:	140c      	movi.n	a4, 1
 40225607:	0c2d      	mov.n	a2, a12
 40225609:	f4a132        	movi	a3, 0x1f4
