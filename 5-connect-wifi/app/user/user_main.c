@@ -24,6 +24,25 @@
 #include "osapi.h"
 #include "user_interface.h"
 
+void wifi_init()
+{
+	struct station_config sta_conf;
+	wifi_set_opmode(STATION_MODE);
+	os_strcpy(sta_conf.ssid, "Openwrt");
+	os_strcpy(sta_conf.password, "12345678");
+	wifi_station_set_config(&sta_conf);
+	wifi_station_connect();
+}
+
+void ICACHE_FLASH_ATTR
+wifi_event_cb(System_Event_t *event)
+{
+	switch (event->event){
+	case EVENT_STAMODE_GOT_IP:
+		os_printf("IP: %d.%d.%d.\n", IP2STR(&event->event_info.got_ip.ip));
+		break;
+	}
+}
 
 void ICACHE_FLASH_ATTR
 user_init(void)
@@ -34,6 +53,9 @@ user_init(void)
     os_printf("\t\t Hello World\r\n");
     os_printf("\t\t SDK version: %s \n", system_get_sdk_version());
     os_printf("\r\n=======================================\r\n");
+
+    wifi_init();
+    wifi_set_event_handler_cb(wifi_event_cb);
 }
 
 /******************************************************************************
@@ -91,6 +113,3 @@ void ICACHE_FLASH_ATTR
 user_rf_pre_init(void)
 {
 }
-
-
-
